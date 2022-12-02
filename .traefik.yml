@@ -1,12 +1,14 @@
-displayName: Demo Plugin
+displayName: Keycloak Introspect
 type: middleware
+
 iconPath: .assets/icon.png
+bannerPath: foo/banner.png
 
-import: github.com/traefik/plugindemo
+import: gordonlukch/Keycloak-Introspect
 
-summary: '[Demo] Add Request Header'
+summary: "Keycloak Introspect"
 
 testData:
   Headers:
     X-Demo: test
-    X-URL: '{{URL}}'
+    X-URL: "{{URL}}"
