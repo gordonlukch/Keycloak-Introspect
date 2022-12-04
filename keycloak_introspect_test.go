@@ -1,4 +1,4 @@
-package plugindemo_test
+package keycloak_introspect_test
 
 import (
 	"context"
@@ -6,11 +6,11 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"github.com/traefik/plugindemo"
+	plugindemo "github.com/gordonlukch/keycloak_introspect"
 )
 
-func TestDemo(t *testing.T) {
-	cfg := plugindemo.CreateConfig()
+func TestKeycloakIntrospect(t *testing.T) {
+	cfg := keycloak_introspect_test.CreateConfig()
 	cfg.Headers["X-Host"] = "[[.Host]]"
 	cfg.Headers["X-Method"] = "[[.Method]]"
 	cfg.Headers["X-URL"] = "[[.URL]]"
