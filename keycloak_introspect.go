@@ -4,6 +4,8 @@ import (
 	"context"
 	"errors"
 	"net/http"
+
+	"github.com/Nerzal/gocloak/v12"
 )
 
 // IntrospectTokenResponse is the response from the introspection endpoint
@@ -40,21 +42,22 @@ func New(ctx context.Context, next http.Handler, config *Config, name string) (h
 }
 
 func (k *keycloak_introspect) ServeHTTP(rw http.ResponseWriter, req *http.Request) {
-	client := gocloak.NewClient(hostname)
+	k.config.Hostname
+	client := gocloak.NewClient(k.config.Hostname)
 	ctx := context.Background()
 
 	const BEARER_SCHEMA = "Bearer "
 	authHeader := req.Header.Get("Authorization")
 	token := authHeader[len(BEARER_SCHEMA):]
 
-	rptResult, err := client.RetrospectToken(ctx, token, clientID, clientSecret, realm)
+	rptResult, err := client.RetrospectToken(ctx, token, k.config.clientID, k.config.clientSecret, k.config.realm)
 	if err != nil {
-		http.Error(res, "Token Inspection: Failed", http.StatusUnauthorized)
+		http.Error(rw, "Token Inspection: Failed", http.StatusUnauthorized)
 		return
 	}
 
 	if !rptResult.Active {
-		http.Error(res, "Token is not active", http.StatusUnauthorized)
+		http.Error(rw, "Token is not active", http.StatusUnauthorized)
 		return
 	}
 
