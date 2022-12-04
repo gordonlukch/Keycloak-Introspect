@@ -1,14 +1,12 @@
 displayName: Keycloak Introspect
 type: middleware
 
-iconPath: .assets/icon.png
-bannerPath: foo/banner.png
-
-import: gordonlukch/Keycloak-Introspect
+import: github.com/gordonlukch/Keycloak-Introspect
 
 summary: "Keycloak Introspect"
 
 testData:
-  Headers:
-    X-Demo: test
-    X-URL: "{{URL}}"
+  hostname: "keyclock hostname"
+  client_id: "xxxxxxxxxx"
+  client_secret: "xxxxxxxxxx"
+  realm: "xxxxxxxxxx"
