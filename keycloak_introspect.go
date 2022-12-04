@@ -29,16 +29,16 @@ type keycloak struct {
 
 func New(ctx context.Context, next http.Handler, config *Config, name string) (http.Handler, error) {
 	if len(config.Hostname) == 0 {
-		return nil, errors.New("The hostname is required")
+		return nil, errors.New("hostname is required")
 	}
 	if len(config.ClientId) == 0 {
-		return nil, errors.New("The client_id is required")
+		return nil, errors.New("client_id is required")
 	}
 	if len(config.ClientSecret) == 0 {
-		return nil, errors.New("The client_secret is required")
+		return nil, errors.New("client_secret is required")
 	}
 	if len(config.Realm) == 0 {
-		return nil, errors.New("The realm is required")
+		return nil, errors.New("realm is required")
 	}
 	return &keycloak{
 		name:   name,
@@ -61,7 +61,7 @@ func (k *keycloak) ServeHTTP(rw http.ResponseWriter, req *http.Request) {
 		return
 	}
 
-	if *rptResult.Active == false {
+	if !*rptResult.Active {
 		http.Error(rw, "Token is not active", http.StatusUnauthorized)
 		return
 	}
