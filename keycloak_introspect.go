@@ -10,7 +10,7 @@ import (
 
 // IntrospectTokenResponse is the response from the introspection endpoint
 
-type IntrospectTokenResponse struct {
+type Config struct {
 	Hostname     string `json:"hostname,omitempty"`
 	ClientId     string `json:"client_id,omitempty"`
 	ClientSecret string `json:"client_secret,omitempty"`
@@ -19,6 +19,12 @@ type IntrospectTokenResponse struct {
 
 func CreateConfig() *Config {
 	return &Config{}
+}
+
+type keycloak struct {
+	name   string
+	next   http.Handler
+	config *Config
 }
 
 func New(ctx context.Context, next http.Handler, config *Config, name string) (http.Handler, error) {
@@ -34,15 +40,14 @@ func New(ctx context.Context, next http.Handler, config *Config, name string) (h
 	if len(config.Realm) == 0 {
 		return nil, errors.New("The realm is required")
 	}
-	return &keycloak_introspect{
+	return &keycloak{
 		name:   name,
 		next:   next,
 		config: config,
 	}, nil
 }
 
-func (k *keycloak_introspect) ServeHTTP(rw http.ResponseWriter, req *http.Request) {
-	k.config.Hostname
+func (k *keycloak) ServeHTTP(rw http.ResponseWriter, req *http.Request) {
 	client := gocloak.NewClient(k.config.Hostname)
 	ctx := context.Background()
 
@@ -50,13 +55,13 @@ func (k *keycloak_introspect) ServeHTTP(rw http.ResponseWriter, req *http.Reques
 	authHeader := req.Header.Get("Authorization")
 	token := authHeader[len(BEARER_SCHEMA):]
 
-	rptResult, err := client.RetrospectToken(ctx, token, k.config.clientID, k.config.clientSecret, k.config.realm)
+	rptResult, err := client.RetrospectToken(ctx, token, k.config.ClientId, k.config.ClientSecret, k.config.Realm)
 	if err != nil {
 		http.Error(rw, "Token Inspection: Failed", http.StatusUnauthorized)
 		return
 	}
 
-	if !rptResult.Active {
+	if *rptResult.Active == false {
 		http.Error(rw, "Token is not active", http.StatusUnauthorized)
 		return
 	}
