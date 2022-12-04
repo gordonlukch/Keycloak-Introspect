@@ -1,4 +1,6 @@
-Keycloak-Introspect Plugin
+### Keycloak-Introspect Plugin
+
+---
 
 ### Configuration
 
