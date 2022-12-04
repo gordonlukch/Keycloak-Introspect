@@ -1,4 +1,4 @@
-module github.com/gordonlukch/keycloak_introspect
+module github.com/gordonlukch/Keycloak-Introspect
 
 go 1.19
 
