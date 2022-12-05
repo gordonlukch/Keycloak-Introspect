@@ -61,7 +61,7 @@ func (k *keycloak) ServeHTTP(rw http.ResponseWriter, req *http.Request) {
 		return
 	}
 
-	if !rptResult.Active {
+	if rptResult.Active != nil {
 		http.Error(rw, "Token is not active", http.StatusUnauthorized)
 		return
 	}
