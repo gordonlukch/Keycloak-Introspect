@@ -51,8 +51,9 @@ func New(ctx context.Context, next http.Handler, config *Config, name string) (h
 }
 
 // ServeHTTP implements the http.Handler interface.
+//
+//nolint:contextcheck
 func (k *keycloak) ServeHTTP(rw http.ResponseWriter, req *http.Request) {
-	//nolint: contextcheck
 	client := gocloak.NewClient(k.config.Hostname)
 	ctx := context.Background()
 
