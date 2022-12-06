@@ -1,3 +1,4 @@
+// Package keycloakintrospect a plugin for validating bearer token using Keycloak.
 package keycloakintrospect
 
 import (
@@ -7,8 +8,6 @@ import (
 
 	"github.com/Nerzal/gocloak/v12"
 )
-
-// IntrospectTokenResponse is the response from the introspection endpoint
 
 // Config the plugin configuration.
 type Config struct {
@@ -52,8 +51,8 @@ func New(ctx context.Context, next http.Handler, config *Config, name string) (h
 }
 
 // ServeHTTP implements the http.Handler interface.
-// nolint: contextcheck
 func (k *keycloak) ServeHTTP(rw http.ResponseWriter, req *http.Request) {
+	//nolint: contextcheck
 	client := gocloak.NewClient(k.config.Hostname)
 	ctx := context.Background()
 
