@@ -25,6 +25,8 @@ linters-settings:
       - FIXME
   gofumpt:
     extra-rules: true
+  nolintlint:
+    allow-leading-space: true
 
 linters:
   enable-all: true

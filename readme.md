@@ -35,7 +35,7 @@ http:
       plugin:
         KcIntrospect:
         	- hostname: "keyclock hostname"
-	        - client_id: "xxxxxxxxxx"
-	        - client_secret: "xxxxxxxxxx"
+	        - clientId: "xxxxxxxxxx"
+	        - clientSecret: "xxxxxxxxxx"
 	        - realm: "xxxxxxxxxx"
 ```

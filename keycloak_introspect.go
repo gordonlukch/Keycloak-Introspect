@@ -13,8 +13,8 @@ import (
 // Config the plugin configuration.
 type Config struct {
 	Hostname     string `json:"hostname,omitempty"`
-	ClientID     string `json:"client_id,omitempty"`
-	ClientSecret string `json:"client_secret,omitempty"`
+	ClientID     string `json:"clientId,omitempty"`
+	ClientSecret string `json:"clientSecret,omitempty"`
 	Realm        string `json:"realm,omitempty"`
 }
 
@@ -57,7 +57,7 @@ func (k *keycloak) ServeHTTP(rw http.ResponseWriter, req *http.Request) {
 	client := gocloak.NewClient(k.config.Hostname)
 	ctx := context.Background()
 
-	const Bearer_Schema = "Bearer "
+	const BearerSchema = "Bearer "
 	authHeader := req.Header.Get("Authorization")
 	token := authHeader[len(Bearer_Schema):]
 
