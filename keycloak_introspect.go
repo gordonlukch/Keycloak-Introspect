@@ -1,4 +1,4 @@
-package keycloak_introspect
+package keycloakintrospect
 
 import (
 	"context"
@@ -63,7 +63,6 @@ func (k *keycloak) ServeHTTP(rw http.ResponseWriter, req *http.Request) {
 
 	rptResult, err := client.RetrospectToken(ctx, token, k.config.ClientID, k.config.ClientSecret, k.config.Realm)
 	if err != nil {
-
 		http.Error(rw, "Token Inspection Error : "+err.Error(), http.StatusUnauthorized)
 		return
 	}
