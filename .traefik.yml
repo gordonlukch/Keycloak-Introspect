@@ -6,7 +6,7 @@ import: github.com/gordonlukch/Keycloak-Introspect
 summary: "Keycloak Introspect"
 
 testData:
-  hostname: "keyclock hostname"
-  client_id: "xxxxxxxxxx"
-  client_secret: "xxxxxxxxxx"
-  realm: "xxxxxxxxxx"
+  hostname: "app.please-open.it"
+  client_id: "traefik_kc_introspect"
+  client_secret: "1iYzEDWYZ59zh6OhiidgoBQsOn9EUKY8"
+  realm: "traefik_plugin_test"
