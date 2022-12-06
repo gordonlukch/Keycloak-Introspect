@@ -1,23 +1,17 @@
 # github.com/Nerzal/gocloak/v12 v12.0.0
-## explicit; go 1.18
+## explicit
 github.com/Nerzal/gocloak/v12
 github.com/Nerzal/gocloak/v12/pkg/jwx
 # github.com/go-resty/resty/v2 v2.7.0
-## explicit; go 1.11
 github.com/go-resty/resty/v2
 # github.com/golang-jwt/jwt/v4 v4.4.2
-## explicit; go 1.16
 github.com/golang-jwt/jwt/v4
 # github.com/opentracing/opentracing-go v1.2.0
-## explicit; go 1.14
 github.com/opentracing/opentracing-go
 github.com/opentracing/opentracing-go/log
 # github.com/pkg/errors v0.9.1
-## explicit
 github.com/pkg/errors
 # github.com/segmentio/ksuid v1.0.4
-## explicit; go 1.12
 github.com/segmentio/ksuid
 # golang.org/x/net v0.0.0-20221019024206-cb67ada4b0ad
-## explicit; go 1.17
 golang.org/x/net/publicsuffix
