@@ -59,11 +59,11 @@ func (k *keycloak) ServeHTTP(rw http.ResponseWriter, req *http.Request) {
 	if err != nil {
 		http.Error(rw, "Token Inspection: Failed", http.StatusUnauthorized)
 		return
-	}
-
-	if rptResult.Active != nil {
-		http.Error(rw, "Token is not active", http.StatusUnauthorized)
-		return
+	} else {
+		if rptResult.Active == nil {
+			http.Error(rw, "Token Inspection: Failed", http.StatusUnauthorized)
+			return
+		}
 	}
 
 	k.next.ServeHTTP(rw, req)
