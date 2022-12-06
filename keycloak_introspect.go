@@ -57,11 +57,12 @@ func (k *keycloak) ServeHTTP(rw http.ResponseWriter, req *http.Request) {
 
 	rptResult, err := client.RetrospectToken(ctx, token, k.config.ClientId, k.config.ClientSecret, k.config.Realm)
 	if err != nil {
-		http.Error(rw, "Token Inspection: Failed", http.StatusUnauthorized)
+
+		http.Error(rw, "Token Inspection Error : "+err.Error(), http.StatusUnauthorized)
 		return
 	}
 	if rptResult.Active == nil {
-		http.Error(rw, "Token Inspection: Failed", http.StatusUnauthorized)
+		http.Error(rw, "Token Inspection Failed : Bearer Token is not Active", http.StatusUnauthorized)
 		return
 	}
 
