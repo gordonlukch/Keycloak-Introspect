@@ -59,7 +59,7 @@ func (k *keycloak) ServeHTTP(rw http.ResponseWriter, req *http.Request) {
 
 	const BearerSchema = "Bearer "
 	authHeader := req.Header.Get("Authorization")
-	token := authHeader[len(Bearer_Schema):]
+	token := authHeader[len(BearerSchema):]
 
 	rptResult, err := client.RetrospectToken(ctx, token, k.config.ClientID, k.config.ClientSecret, k.config.Realm)
 	if err != nil {
