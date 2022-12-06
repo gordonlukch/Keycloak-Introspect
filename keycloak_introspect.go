@@ -10,28 +10,32 @@ import (
 
 // IntrospectTokenResponse is the response from the introspection endpoint
 
+// Config the plugin configuration.
 type Config struct {
 	Hostname     string `json:"hostname,omitempty"`
-	ClientId     string `json:"client_id,omitempty"`
+	ClientID     string `json:"client_id,omitempty"`
 	ClientSecret string `json:"client_secret,omitempty"`
 	Realm        string `json:"realm,omitempty"`
 }
 
+// CreateConfig creates the default plugin configuration.
 func CreateConfig() *Config {
 	return &Config{}
 }
 
+// string returns a readable representation of the configuration.
 type keycloak struct {
 	name   string
 	next   http.Handler
 	config *Config
 }
 
+// New created a new plugin.
 func New(ctx context.Context, next http.Handler, config *Config, name string) (http.Handler, error) {
 	if len(config.Hostname) == 0 {
 		return nil, errors.New("hostname is required")
 	}
-	if len(config.ClientId) == 0 {
+	if len(config.ClientID) == 0 {
 		return nil, errors.New("client_id is required")
 	}
 	if len(config.ClientSecret) == 0 {
@@ -47,15 +51,17 @@ func New(ctx context.Context, next http.Handler, config *Config, name string) (h
 	}, nil
 }
 
+// ServeHTTP implements the http.Handler interface.
+// nolint: contextcheck
 func (k *keycloak) ServeHTTP(rw http.ResponseWriter, req *http.Request) {
 	client := gocloak.NewClient(k.config.Hostname)
 	ctx := context.Background()
 
-	const BEARER_SCHEMA = "Bearer "
+	const Bearer_Schema = "Bearer "
 	authHeader := req.Header.Get("Authorization")
-	token := authHeader[len(BEARER_SCHEMA):]
+	token := authHeader[len(Bearer_Schema):]
 
-	rptResult, err := client.RetrospectToken(ctx, token, k.config.ClientId, k.config.ClientSecret, k.config.Realm)
+	rptResult, err := client.RetrospectToken(ctx, token, k.config.ClientID, k.config.ClientSecret, k.config.Realm)
 	if err != nil {
 
 		http.Error(rw, "Token Inspection Error : "+err.Error(), http.StatusUnauthorized)
