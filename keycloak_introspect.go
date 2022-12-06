@@ -35,10 +35,10 @@ func New(ctx context.Context, next http.Handler, config *Config, name string) (h
 		return nil, errors.New("hostname is required")
 	}
 	if len(config.ClientID) == 0 {
-		return nil, errors.New("client_id is required")
+		return nil, errors.New("clientId is required")
 	}
 	if len(config.ClientSecret) == 0 {
-		return nil, errors.New("client_secret is required")
+		return nil, errors.New("clientSecret is required")
 	}
 	if len(config.Realm) == 0 {
 		return nil, errors.New("realm is required")
