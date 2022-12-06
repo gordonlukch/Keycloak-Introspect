@@ -61,10 +61,10 @@ jobs:
           go mod vendor
           # git diff --exit-code ./vendor/
 
-      # - name: Lint and Tests
-      #   run: make
+      - name: Lint and Tests
+        run: make
 
-      # - name: Run tests with Yaegi
-      #   run: make yaegi_test
-      #   env:
-      #     GOPATH: ${{ github.workspace }}/go
+      - name: Run tests with Yaegi
+        run: make yaegi_test
+        env:
+          GOPATH: ${{ github.workspace }}/go
